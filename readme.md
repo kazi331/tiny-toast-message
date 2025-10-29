@@ -1,4 +1,4 @@
-# Your Toast Package Name
+# Tiny Toast Message
 
 A lightweight, type-safe toast notification system for React applications.
 
@@ -16,11 +16,11 @@ A lightweight, type-safe toast notification system for React applications.
 ## Installation
 
 ```bash
-npm install your-toast-package-name
+npm install tiny-toast-message
 # or
-yarn add your-toast-package-name
+yarn add tiny-toast-message
 # or
-pnpm add your-toast-package-name
+pnpm add tiny-toast-message
 ```
 
 ## Usage
@@ -28,7 +28,7 @@ pnpm add your-toast-package-name
 ### 1. Wrap your app with ToastProvider
 
 ```tsx
-import { ToastProvider } from "your-toast-package-name";
+import { ToastProvider } from "tiny-toast-message";
 
 function App() {
   return (
@@ -42,7 +42,7 @@ function App() {
 ### 2. Use the useToast hook
 
 ```tsx
-import { useToast } from "your-toast-package-name";
+import { useToast } from "tiny-toast-message";
 
 function MyComponent() {
   const toast = useToast();
