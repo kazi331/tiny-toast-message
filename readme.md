@@ -135,3 +135,21 @@ toast.custom(
 ```
 
 ## License
+
+```json
+{
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kazi331/tiny-toast-message.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kazi331/tiny-toast-message/issues"
+  },
+  "homepage": "https://github.com/kazi331/tiny-toast-message#readme",
+  "author": {
+    "name": "Kazi Shariful Islam",
+    "email": "kazisharif.dev@gmail.com",
+    "url": "https://kazi331.vercel.app"
+  }
+}
+```
