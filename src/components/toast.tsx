@@ -1,8 +1,7 @@
-import { CSSProperties, useEffect, useState } from "react";
-import { Toast } from "../types/common";
-import styles from "./style";
-import React from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
+import { Toast } from "../types";
 import { Icons } from "./icons";
+import styles from "./style";
 
 
 interface ToastComponentProps {

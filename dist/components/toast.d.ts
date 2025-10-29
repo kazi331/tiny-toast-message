@@ -1,4 +1,4 @@
-import { Toast } from "../types/common";
+import { Toast } from "../types";
 interface ToastComponentProps {
     toast: Toast;
     onClose: () => void;

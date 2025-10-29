@@ -1,4 +1,4 @@
-import { Toast } from "../types/common";
+import { Toast } from "../types";
 interface ToastContainerProps {
     toasts: Toast[];
     removeToast: (id: number) => void;

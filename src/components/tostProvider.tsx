@@ -1,8 +1,6 @@
 import React, { createContext, ReactNode, useCallback, useContext, useState } from "react";
-import { Toast, ToastContextValue, ToastOptions } from "../types/common";
+import { Toast, ToastContextValue, ToastOptions } from "../types";
 import ToastContainer from "./toastContainer";
-
-
 
 const ToastContext = createContext<ToastContextValue | null>(null);
 
@@ -79,9 +77,8 @@ export function ToastProvider({ children }: ToastProviderProps): JSX.Element {
     );
 }
 
-// ========================================
 
-// useToast.ts
+
 export function useToast(): ToastContextValue {
     const context = useContext(ToastContext);
     if (!context) {
@@ -89,3 +86,4 @@ export function useToast(): ToastContextValue {
     }
     return context;
 }
+

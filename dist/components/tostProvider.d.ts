@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { ToastContextValue } from "../types/common";
+import { ToastContextValue } from "../types";
 interface ToastProviderProps {
     children: ReactNode;
 }

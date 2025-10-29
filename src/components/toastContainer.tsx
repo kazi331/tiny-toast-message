@@ -1,7 +1,7 @@
 import React from "react";
+import { Toast } from "../types";
 import styles from "./style";
 import ToastComponent from "./toast";
-import { Toast } from "../types/common";
 
 
 interface ToastContainerProps {
