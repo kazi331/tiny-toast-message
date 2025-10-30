@@ -1,9 +1,15 @@
 {
   "name": "tiny-toast-message",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "A lightweight, customizable toast notification system for React with TypeScript support",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kazi331/tiny-toast-message.git"
+  },
+  "author": "Kazi Shariful Islam <kazisharif.dev@gmail.com>",
+  "license": "MIT",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
@@ -22,8 +28,6 @@
     "message",
     "typescript"
   ],
-  "author": "Your Name",
-  "license": "MIT",
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
