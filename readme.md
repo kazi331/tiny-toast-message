@@ -25,33 +25,22 @@ pnpm add tiny-toast-message
 
 ## Usage
 
-### 1. Wrap your app with ToastProvider
+### 1. Import Toaster 
 
 ```tsx
-import { ToastProvider } from "tiny-toast-message";
+import { Toaster } from "tiny-toast-message";
 
 function App() {
   return (
-    <ToastProvider>
-      <YourApp />
-    </ToastProvider>
+     <div>
+      <Toaster />
+      <button onClick={() => toast('My first toast')}>My awesome toast</button>
+    </div>
   );
 }
 ```
 
-### 2. Use the useToast hook
 
-```tsx
-import { useToast } from "tiny-toast-message";
-
-function MyComponent() {
-  const toast = useToast();
-
-  return (
-    <button onClick={() => toast.success("Saved successfully!")}>Save</button>
-  );
-}
-```
 
 ## API
 
