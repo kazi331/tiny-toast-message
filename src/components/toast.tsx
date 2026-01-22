@@ -4,10 +4,10 @@ import { ToastListener, ToastOptions, ToastPosition, type Toast } from "../types
 import { Icons } from "./icons";
 import { styles } from "./style";
 
-
 // Toast state management (outside React)
 let toastListeners: ToastListener[] = [];
 let toastId = 0;
+let defaultDuration = 3000;
 
 function notifyListeners(toasts: Toast[]) {
   toastListeners.forEach((listener) => listener(toasts));
@@ -40,7 +40,7 @@ export const toast = (message: string, options: ToastOptions = {}) => {
     id,
     message,
     type: options.type || "default",
-    duration: options.duration ?? 3000,
+    duration: options.duration ?? defaultDuration,
     action: options.action,
     onAction: options.onAction,
     description: options.description,
@@ -71,7 +71,7 @@ toast.custom = (element: ReactNode, options: ToastOptions = {}) => {
     id,
     message: null,
     type: "custom" as const,
-    duration: options.duration ?? 3000,
+    duration: options.duration ?? defaultDuration,
     customElement: element,
   };
 
@@ -101,9 +101,15 @@ function getToastContainer(): HTMLDivElement {
 }
 
 // Toaster Component (add once to your app)
-export function Toaster({ position = "bottom-right" }: { position?: ToastPosition }) {
+export function Toaster({ position = "bottom-right", duration, maxCount = 5 }: { position?: ToastPosition, duration?: number, maxCount?: number }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (duration) {
+      defaultDuration = duration;
+    }
+  }, [duration]);
 
   useEffect(() => {
     // Get or create the container
@@ -132,15 +138,16 @@ export function Toaster({ position = "bottom-right" }: { position?: ToastPositio
     },
     "bottom-right": { bottom: "20px", right: "10px" },
   };
-
+console.log(toasts.length)
   if (!container) return null;
 
   return createPortal(
     <div style={{ ...styles.container, ...positionStyles[position] }}>
-      {toasts.map((toastItem) => (
+      {toasts.reverse().slice(0, maxCount).map((toastItem) => (
         <Toast
           key={toastItem.id}
           toast={toastItem}
+          duration={duration}
           onClose={() => removeToastFromState(toastItem.id)}
         />
       ))}
@@ -150,12 +157,12 @@ export function Toaster({ position = "bottom-right" }: { position?: ToastPositio
 }
 
 // Individual Toast Component
-function Toast({ toast: toastData, onClose }: { toast: Toast, onClose: () => void }) {
+function Toast({ toast: toastData, onClose, duration }: { toast: Toast, onClose: () => void, duration?: number }) {
   const [isExiting, setIsExiting] = useState(false);
 
   const handleClose = () => {
     setIsExiting(true);
-    setTimeout(onClose, 300);
+    setTimeout(onClose, duration);
   };
 
   const handleAction = () => {
