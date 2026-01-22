@@ -4,25 +4,27 @@ A lightweight, dependency-free toast notification system for React applications.
 
 ## Features
 
-* 🎨 Pre-built toast variants: **success, error, warning, info**
-* ⚡ Global API – trigger toasts from anywhere
-* 🧩 Supports **custom React elements**
-* 🕒 Auto-dismiss or persistent toasts
-* 📍 Configurable positions
-* 🔢 Max toast count control
-* 🎯 Full TypeScript support
-* 🎨 No CSS required (inline styles)
+- 🎨 Pre-built toast variants: **success, error, warning, info**
+- ⚡ Global API – trigger toasts from anywhere
+- 🧩 Supports **custom React elements**
+- 🕒 Auto-dismiss or persistent toasts
+- 📍 Configurable positions
+- 🔢 Max toast count control
+- 🎯 Full TypeScript support
+- 🎨 No CSS required (inline styles)
 
 ---
 
 ## Installation
 
 ```bash
-npm install tiny-toast-message
+npm install @kazisharif/sonner
 # or
-yarn add tiny-toast-message
+yarn add @kazisharif/sonner
 # or
-pnpm add tiny-toast-message
+pnpm add @kazisharif/sonner
+# or
+bun i @kazisharif/sonner
 ```
 
 ---
@@ -34,7 +36,7 @@ pnpm add tiny-toast-message
 Place the `Toaster` component **once** in your app (usually near the root).
 
 ```tsx
-import { Toaster } from "tiny-toast-message";
+import { Toaster } from "@kazisharif/sonner";
 
 function App() {
   return (
@@ -53,7 +55,7 @@ export default App;
 ### 2. Trigger toasts from anywhere
 
 ```tsx
-import { toast } from "tiny-toast-message";
+import { toast } from "@kazisharif/sonner";
 
 toast("Hello world");
 ```
@@ -78,10 +80,10 @@ toast.info("New update available");
 ```ts
 interface ToastOptions {
   type?: "success" | "error" | "warning" | "info" | "default";
-  duration?: number;        // milliseconds or Infinity
-  action?: string;          // action button label
-  onAction?: () => void;    // action button handler
-  description?: string;    // secondary text
+  duration?: number; // milliseconds or Infinity
+  action?: string; // action button label
+  onAction?: () => void; // action button handler
+  description?: string; // secondary text
 }
 ```
 
@@ -128,7 +130,7 @@ toast.custom(
     <h4>Custom Content</h4>
     <p>Any React element works here</p>
   </div>,
-  { duration: 5000 }
+  { duration: 5000 },
 );
 ```
 
@@ -155,11 +157,7 @@ toast.dismiss();
 ## Toaster Configuration
 
 ```tsx
-<Toaster
-  position="bottom-right"
-  duration={4000}
-  maxCount={5}
-/>
+<Toaster position="bottom-right" duration={4000} maxCount={5} />
 ```
 
 ### Props
@@ -186,13 +184,12 @@ type ToastPosition =
 
 ## Notes
 
-* The toast system uses a **single DOM portal** attached to `document.body`
-* Toasts are **global**, no React context required
-* Safe to call `toast()` from:
-
-  * event handlers
-  * async functions
-  * non-React files
+- The toast system uses a **single DOM portal** attached to `document.body`
+- Toasts are **global**, no React context required
+- Safe to call `toast()` from:
+  - event handlers
+  - async functions
+  - non-React files
 
 ---
 
@@ -202,12 +199,12 @@ type ToastPosition =
 {
   "repository": {
     "type": "git",
-    "url": "https://github.com/kazi331/tiny-toast-message.git"
+    "url": "https://github.com/kazi331/sonner.git"
   },
   "bugs": {
-    "url": "https://github.com/kazi331/tiny-toast-message/issues"
+    "url": "https://github.com/kazi331/sonner/issues"
   },
-  "homepage": "https://github.com/kazi331/tiny-toast-message#readme",
+  "homepage": "https://github.com/kazi331/sonner#readme",
   "author": {
     "name": "Kazi Shariful Islam",
     "email": "kazisharif.dev@gmail.com",
@@ -215,5 +212,3 @@ type ToastPosition =
   }
 }
 ```
-
-

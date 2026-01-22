@@ -1,13 +1,13 @@
 {
   "name": "@kazisharif/sonner",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "A lightweight, customizable toast notification system for React with TypeScript support",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kazi331/tiny-toast-message.git"
+    "url": "git+https://github.com/kazi331/sonner.git"
   },
   "author": "Kazi Shariful Islam <kazisharif.dev@gmail.com>",
   "license": "MIT",
