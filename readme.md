@@ -1,17 +1,19 @@
 # Tiny Toast Message
 
-A lightweight, type-safe toast notification system for React applications.
+A lightweight, dependency-free toast notification system for React applications.
 
 ## Features
 
-- 🎨 Beautiful pre-designed toast variants (success, error, warning, info)
-- 🎯 Full TypeScript support with type safety
-- ⚡ Zero dependencies (except React)
-- 🎨 No CSS required - works with inline styles
-- 🔧 Fully customizable with custom elements
-- 📱 Responsive and mobile-friendly
-- ♿ Accessible with ARIA labels
-- 🪶 Lightweight (~5KB gzipped)
+* 🎨 Pre-built toast variants: **success, error, warning, info**
+* ⚡ Global API – trigger toasts from anywhere
+* 🧩 Supports **custom React elements**
+* 🕒 Auto-dismiss or persistent toasts
+* 📍 Configurable positions
+* 🔢 Max toast count control
+* 🎯 Full TypeScript support
+* 🎨 No CSS required (inline styles)
+
+---
 
 ## Installation
 
@@ -23,72 +25,67 @@ yarn add tiny-toast-message
 pnpm add tiny-toast-message
 ```
 
-## Usage
+---
 
-### 1. Import Toaster 
+## Basic Usage
+
+### 1. Mount the `<Toaster />` once
+
+Place the `Toaster` component **once** in your app (usually near the root).
 
 ```tsx
 import { Toaster } from "tiny-toast-message";
 
 function App() {
   return (
-     <div>
+    <>
       <Toaster />
-      <button onClick={() => toast('My first toast')}>My awesome toast</button>
-    </div>
+      {/* your app */}
+    </>
   );
 }
+
+export default App;
 ```
 
+---
 
-
-## API
-
-### Toast Methods
+### 2. Trigger toasts from anywhere
 
 ```tsx
-const toast = useToast();
+import { toast } from "tiny-toast-message";
 
-// Basic toasts
-toast.success("Success message");
-toast.error("Error message");
-toast.warning("Warning message");
-toast.info("Info message");
-toast.addToast("Default message");
-
-// With options
-toast.success("Saved!", {
-  description: "Your changes have been saved",
-  duration: 5000,
-  action: "Undo",
-  onAction: () => console.log("Undo clicked"),
-});
-
-// Custom element
-toast.custom(
-  <div>
-    <h3>Custom Toast</h3>
-    <p>Any React element works here!</p>
-  </div>,
-  { duration: 5000 }
-);
-
-// Persistent toast (manual close only)
-toast.info("Important message", { duration: Infinity });
+toast("Hello world");
 ```
 
-### ToastOptions
+No hooks. No providers. Just call `toast()`.
 
-```typescript
+---
+
+## Toast Variants
+
+```tsx
+toast.success("Saved successfully");
+toast.error("Something went wrong");
+toast.warning("Be careful");
+toast.info("New update available");
+```
+
+---
+
+## Toast Options
+
+```ts
 interface ToastOptions {
   type?: "success" | "error" | "warning" | "info" | "default";
-  duration?: number; // milliseconds, or Infinity
-  action?: string; // action button label
-  onAction?: () => void; // action button callback
-  description?: string; // secondary text
-  customElement?: ReactNode; // for custom toasts
+  duration?: number;        // milliseconds or Infinity
+  action?: string;          // action button label
+  onAction?: () => void;    // action button handler
+  description?: string;    // secondary text
 }
 ```
+
+---
 
 ## Examples
 
@@ -96,9 +93,11 @@ interface ToastOptions {
 
 ```tsx
 toast.success("Upload complete", {
-  description: "Your file has been uploaded to the server",
+  description: "Your file has been uploaded",
 });
 ```
+
+---
 
 ### With Action Button
 
@@ -109,21 +108,95 @@ toast.info("Item deleted", {
 });
 ```
 
-### Custom Toast
+---
+
+### Persistent Toast (Manual Close)
+
+```tsx
+toast.warning("This requires attention", {
+  duration: Infinity,
+});
+```
+
+---
+
+## Custom Toast (React Element)
 
 ```tsx
 toast.custom(
-  <div style={{ display: "flex", gap: "12px" }}>
-    <img src="avatar.jpg" style={{ width: "40px", borderRadius: "50%" }} />
-    <div>
-      <strong>New Message</strong>
-      <p>You have a new message from John</p>
-    </div>
-  </div>
+  <div>
+    <h4>Custom Content</h4>
+    <p>Any React element works here</p>
+  </div>,
+  { duration: 5000 }
 );
 ```
 
-## License
+---
+
+## Dismissing Toasts
+
+### Dismiss a specific toast
+
+```tsx
+const id = toast("Temporary message");
+
+toast.dismiss(id);
+```
+
+### Dismiss all toasts
+
+```tsx
+toast.dismiss();
+```
+
+---
+
+## Toaster Configuration
+
+```tsx
+<Toaster
+  position="bottom-right"
+  duration={4000}
+  maxCount={5}
+/>
+```
+
+### Props
+
+| Prop     | Type            | Default        | Description        |
+| -------- | --------------- | -------------- | ------------------ |
+| position | `ToastPosition` | `bottom-right` | Toast placement    |
+| duration | `number`        | `3000`         | Default duration   |
+| maxCount | `number`        | `5`            | Max visible toasts |
+
+### Available Positions
+
+```ts
+type ToastPosition =
+  | "top-left"
+  | "top-center"
+  | "top-right"
+  | "bottom-left"
+  | "bottom-center"
+  | "bottom-right";
+```
+
+---
+
+## Notes
+
+* The toast system uses a **single DOM portal** attached to `document.body`
+* Toasts are **global**, no React context required
+* Safe to call `toast()` from:
+
+  * event handlers
+  * async functions
+  * non-React files
+
+---
+
+## License & Repository
 
 ```json
 {
@@ -142,3 +215,5 @@ toast.custom(
   }
 }
 ```
+
+
