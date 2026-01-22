@@ -19,7 +19,7 @@ export const styles = {
         boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
         pointerEvents: "auto" as const,
         transition: "all 0.3s ease",
-        minHeight: "60px",
+        // minHeight: "60px",
     },
     toastEnter: {
         animation: "slideIn 0.3s ease",

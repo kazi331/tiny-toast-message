@@ -8,6 +8,7 @@ import { styles } from "./style";
 let toastListeners: ToastListener[] = [];
 let toastId = 0;
 let defaultDuration = 3000;
+let defaultMaxCount = 5;
 
 function notifyListeners(toasts: Toast[]) {
   toastListeners.forEach((listener) => listener(toasts));
@@ -16,7 +17,7 @@ function notifyListeners(toasts: Toast[]) {
 let toastsState: Toast[] = [];
 
 function addToastToState(toast: Toast) {
-  toastsState = [...toastsState, toast];
+  toastsState = [...toastsState.slice( - defaultMaxCount + 1), toast];
   notifyListeners(toastsState);
 
   if (toast.duration !== Infinity) {
@@ -109,7 +110,10 @@ export function Toaster({ position = "bottom-right", duration, maxCount = 5 }: {
     if (duration) {
       defaultDuration = duration;
     }
-  }, [duration]);
+    if (maxCount) {
+      defaultMaxCount = maxCount;
+    }
+  }, [duration, maxCount]);
 
   useEffect(() => {
     // Get or create the container
@@ -117,15 +121,16 @@ export function Toaster({ position = "bottom-right", duration, maxCount = 5 }: {
 
     const listener: ToastListener = (newToasts: Toast[]) => {
       setToasts(newToasts);
-    };
+    }; 
 
-    toastListeners.push(listener);
-
+    toastListeners.push(listener);    
     return () => {
       toastListeners = toastListeners.filter((l) => l !== listener);
     };
   }, []);
 
+
+  
   const positionStyles: Record<ToastPosition, React.CSSProperties> = {
     "top-left": { top: "20px", left: "20px" },
     "top-center": { top: "20px", left: "50%", transform: "translateX(-50%)" },
@@ -138,12 +143,11 @@ export function Toaster({ position = "bottom-right", duration, maxCount = 5 }: {
     },
     "bottom-right": { bottom: "20px", right: "10px" },
   };
-console.log(toasts.length)
   if (!container) return null;
 
   return createPortal(
     <div style={{ ...styles.container, ...positionStyles[position] }}>
-      {toasts.reverse().slice(0, maxCount).map((toastItem) => (
+      {toasts.map((toastItem) => (
         <Toast
           key={toastItem.id}
           toast={toastItem}
